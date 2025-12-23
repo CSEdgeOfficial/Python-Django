@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Hello World - Django Project{% endblock %}
+
+{% block content %}
+<div class="hero-section">
+    <h1 class="hero-title">Hello World!</h1>
+    <p class="hero-subtitle">Welcome to our Django Application</p>
+    <div class="hero-content">
+        <p>This is a simple Django project demonstrating:</p>
+        <ul class="feature-list">
+            <li>✓ Hello World page</li>
+            <li>✓ User Registration functionality</li>
+            <li>✓ User data display</li>
+            <li>✓ CSS styling</li>
+            <li>✓ JavaScript interactions</li>
+        </ul>
+        <div class="cta-buttons">
+            <a href="{% url 'register' %}" class="btn btn-primary">Register Now</a>
+            <a href="{% url 'users_list' %}" class="btn btn-secondary">View Users</a>
+        </div>
+    </div>
+</div>
+
+<div class="info-section">
+    <h2>About This Project</h2>
+    <p>This Django application demonstrates basic CRUD operations with user registration, 
+    styled with custom CSS and enhanced with JavaScript for interactive features.</p>
+</div>
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block title %}Registered Users - Django Project{% endblock %}
+
+{% block content %}
+<div class="users-section">
+    <h1>Registered Users</h1>
+    <p class="section-description">View all registered users in the system</p>
+    
+    <div class="users-actions">
+        <a href="{% url 'register' %}" class="btn btn-primary">Add New User</a>
+        <button id="toggleView" class="btn btn-secondary">Toggle View</button>
+    </div>
+
+    {% if users %}
+        <div class="users-container" id="usersContainer">
+            <table class="users-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Username</th>
+                        <th>Full Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Registered On</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr class="user-row">
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.full_name }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.phone|default:"N/A" }}</td>
+                        <td>{{ user.created_at|date:"M d, Y H:i" }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <div class="users-cards" style="display: none;">
+                {% for user in users %}
+                <div class="user-card">
+                    <div class="card-header">
+                        <h3>{{ user.username }}</h3>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Full Name:</strong> {{ user.full_name }}</p>
+                        <p><strong>Email:</strong> {{ user.email }}</p>
+                        <p><strong>Phone:</strong> {{ user.phone|default:"N/A" }}</p>
+                        <p><strong>Registered:</strong> {{ user.created_at|date:"M d, Y H:i" }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="users-stats">
+            <p>Total Registered Users: <strong>{{ users|length }}</strong></p>
+        </div>
+    {% else %}
+        <div class="empty-state">
+            <p>No users registered yet.</p>
+            <a href="{% url 'register' %}" class="btn btn-primary">Register First User</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
